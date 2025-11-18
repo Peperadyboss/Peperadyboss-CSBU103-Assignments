@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Silly Cat Gallery</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+    }
+
+    h1 {
+      text-align: center;
+      padding: 20px;
+      color: #333;
+    }
+
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      padding: 20px;
+    }
+
+    .zoomable {
+      width: 200px;
+      height: auto;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: transform 0.3s ease;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .zoomable:hover {
+      transform: scale(1.05);
+    }
+
+    #overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.8);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    #overlay-img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 10px;
+      box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+    }
+  </style>
+</head>
+<body>
+  <h1>Cat Red Carpet</h1>
+  <div class="gallery">
+    <img src="https://petpricelist.com/wp-content/uploads/2023/02/what-are-the-cutest-cat-breeds-siamese.png" alt="Cat 1" class="zoomable" />
+    <img src="https://images.pexels.com/photos/1543793/pexels-photo-1543793.jpeg?cs=srgb&dl=adorable-animal-cat-1543793.jpg&fm=jpg" alt="Cat 2" class="zoomable" />
+    <img src="https://tse4.mm.bing.net/th/id/OIP.qvtf8E1o8m0RKxBTA5WiQgHaJ0?cb=ucfimgc2&w=1508&h=2000&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Cat 3" class="zoomable" />
+    <img src="https://images6.alphacoders.com/407/thumb-1920-407838.jpg" alt="Cat 4" class="zoomable" />
+  </div>
+
+  <div id="overlay">
+    <img id="overlay-img" src="" alt="Zoomed Photo" />
+  </div>
+
+  <script>
+    const zoomableImages = document.querySelectorAll('.zoomable');
+    const overlay = document.getElementById('overlay');
+    const overlayImg = document.getElementById('overlay-img');
+
+    zoomableImages.forEach(img => {
+      img.addEventListener('click', () => {
+        overlayImg.src = img.src;
+        overlay.style.display = 'flex';
+      });
+    });
+
+    overlay.addEventListener('click', () => {
+      overlay.style.display = 'none';
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        overlay.style.display = 'none';
+      }
+    });
+  </script>
+</body>
+</html>
